@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="layoutclass">
     <q-header elevated>
-      <q-toolbar class="bg-accent">
+      <q-toolbar class="bg-accent col-12">
         <q-img
           class="absolute-left"
           spinner-color="white"
@@ -9,11 +9,13 @@
           style="width: 35px; height: 45px; margin-left: 9px; margin-top: 5px;"
         />
         <!-- <q-space></q-space> -->
-        <q-toolbar-title  style="text-align:center">
+        <q-toolbar-title style="text-align:center">
           Homingos
         </q-toolbar-title>
 
-        <div v-if="!$q.platform.is.mobile && $q.screen.gt.md ">A Smart Photography Application</div>
+        <div v-if="!$q.platform.is.mobile && $q.screen.gt.md">
+          A Smart Photography Application
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -38,7 +40,7 @@
       </q-list>
     </q-drawer> -->
 
-    <q-page-container class="q-pb-md">
+    <q-page-container class="q-pb-none q-mb-none">
       <!-- <q-parallax src="https://cdn.quasar.dev/img/parallax2.jpg"> -->
       <router-view />
       <!-- </q-parallax> -->

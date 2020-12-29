@@ -3,18 +3,35 @@
     <!-- {{ $q.platform }} -->
     <div class="row">
       <span
-        class="text-h3  text-grey-3 bg-pink-5 col-12 text-underline"
+        :class="$q.screen.lt.sm ? 'text-h5' : 'text-h3'"
+        class=" text-grey-3 bg-pink-5 col-12 text-underline"
         style="text-align:center"
         >IMAGE GALLERY</span
       >
+      <q-icon
+        name="fas fa-sign-out-alt"
+        flat
+        :size="$q.screen.lt.sm ? 'md' : 'xl'"
+        unelevated
+        class="text-white"
+        style="position: absolute;top: 50px;right: 20px;z-index:300; opacity: 1;"
+        @click="$router.push('/')"
+        ><q-tooltip max-height="30%" max-width="25%">
+          <div class="tooltip-content">
+            Sign Out
+          </div>
+        </q-tooltip>
+      </q-icon>
     </div>
+
     <q-page-sticky
       :style="$q.platform.is.mobile || $q.screen.lt.md ? 'z-index:200' : ''"
       position="bottom-right"
       :offset="[25, 25]"
     >
+      <!-- Proceed To CheckOut -->
       <q-btn
-        label="Proceed To CheckOut"
+        label="Save and Continue"
         unelevated
         dense
         size="lg"
@@ -51,6 +68,16 @@
                 ? 'width:80vw'
                 : 'width:40vw'
             "
+            ><q-btn
+              icon="add_box"
+              size="xl"
+              align="center"
+              label="Add File"
+              flat
+              color="white"
+              unelevated
+              @click="Uploadfile = true"
+            ></q-btn
           ></q-item-section>
         </q-item>
         <q-item v-else class="Itemclass">
@@ -116,6 +143,62 @@
         </q-item>
       </q-list>
     </div>
+    <q-dialog
+      v-model="Uploadfile"
+      persistent
+      :maximized="maximizedToggle"
+      transition-show="slide-up"
+      transition-hide="slide-down"
+    >
+      <q-card
+        flat
+        :style="
+          !maximizedToggle
+            ? $q.platform.is.mobile || $q.screen.lt.md
+              ? 'width:100vw ;max-width:500px; height:320px'
+              : 'width: 600px; max-width: 80vw'
+            : ''
+        "
+      >
+        <q-bar class="bg-primary text-white">
+          <span class="text-subtitle2">Upload Files</span>
+          <q-space />
+          <q-btn
+            dense
+            flat
+            icon="fas fa-compress"
+            @click="maximizedToggle = false"
+            :disable="!maximizedToggle"
+          >
+            <q-tooltip
+              v-if="maximizedToggle"
+              content-class="bg-white text-primary"
+              >Minimize</q-tooltip
+            >
+          </q-btn>
+          <q-btn
+            dense
+            flat
+            icon="crop_square"
+            @click="maximizedToggle = true"
+            :disable="maximizedToggle"
+          >
+            <q-tooltip
+              v-if="!maximizedToggle"
+              content-class="bg-white text-primary"
+              >Maximize</q-tooltip
+            >
+          </q-btn>
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+          </q-btn>
+        </q-bar>
+
+        <q-card-section>
+          <uploder />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -136,13 +219,18 @@ import { Loading, QSpinnerGears, QSpinnerIos } from "quasar";
   },
   computed: {
     ...mapGetters("common", ["getphotos"])
+  },
+  components: {
+    uploder: () => import("./uploader")
   }
 })
 class Dashboard extends Vue {
   data() {
     return {
       videos: [],
-      showList: false
+      showList: false,
+      Uploadfile: false,
+      maximizedToggle: false
     };
   }
   get videolist() {
@@ -171,14 +259,14 @@ class Dashboard extends Vue {
       .then(response => {
         const { data } = response;
         this.$q.loading.hide();
-        this.videos = data;
+        this.videos = _.cloneDeep(data);
         _.forEach(this.videos, v => {
           v["selectedframe"] = v.frames[0].id;
         });
         if (this.videos.length < 5) {
           this.videos.push({ id: "new" });
         }
-        this.updatePhotos(this.videos);
+        this.updatePhotos(_.cloneDeep(this.videos));
         // this.toggleSpinner(false)
 
         this.showList = true;
@@ -201,7 +289,7 @@ class Dashboard extends Vue {
     this.confirm(msg).onOk(() => {
       this.showList = false;
       this.videos.splice(index, 1);
-      this.updatePhotos(this.videos);
+      this.updatePhotos(_.cloneDeep(this.videos));
       this.showList = true;
     });
   }
@@ -232,6 +320,7 @@ class Dashboard extends Vue {
           message: "Data Saved Sucessfully...",
           type: "positive"
         });
+        self.$router.push("/");
 
         console.log(response);
       },

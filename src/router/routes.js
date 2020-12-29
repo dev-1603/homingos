@@ -5,6 +5,11 @@ var routes = [
     children: [
       {
         path: "",
+        name: "Intro",
+        component: () => import("pages/intro.vue")
+      },
+      {
+        path: "/dashboard",
         name: "dashboard",
         component: () => import("pages/index.vue")
       }
