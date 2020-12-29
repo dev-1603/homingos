@@ -90,11 +90,14 @@ module.exports = function(/* ctx */) {
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      // components: [],
+      components: [
+        "QCard",
+               
+      ],
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Loading", "Dialog"]
+      plugins: ["Loading", "Dialog", "Notify"]
     },
 
     // animations: 'all', // --- includes all animations

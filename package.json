@@ -1,8 +1,8 @@
 {
   "name": "homingos",
   "version": "0.0.1",
-  "description": "smart picture appication",
-  "productName": "homingos",
+  "description": "A Smart Photos appication",
+  "productName": "Homingos",
   "author": "Debjyoti Mohapatra <>",
   "private": true,
   "scripts": {

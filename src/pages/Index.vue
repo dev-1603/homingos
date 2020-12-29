@@ -1,8 +1,36 @@
 <template>
   <div>
     <!-- {{ $q.platform }} -->
+    <div class="row">
+      <span
+        class="text-h3  text-grey-3 bg-pink-5 col-12 text-underline"
+        style="text-align:center"
+        >IMAGE GALLERY</span
+      >
+    </div>
+    <q-page-sticky
+      :style="$q.platform.is.mobile || $q.screen.lt.md ? 'z-index:200' : ''"
+      position="bottom-right"
+      :offset="[25, 25]"
+    >
+      <q-btn
+        label="Proceed To CheckOut"
+        unelevated
+        dense
+        size="lg"
+        color="pink-5"
+        icon-right="send"
+        rounded
+        class="float-right q-ma-sm"
+        @click="SaveData()"
+      ></q-btn>
+      <!-- style="z-index:100; position:absolute;bottom: 50px; right: 5px;" -->
+      <!-- <q-btn fab icon="add" color="accent" /> -->
+    </q-page-sticky>
     <div
-      :style="$q.platform.is.desktop || $q.screen.gt.md ? '' : ''"
+      :style="
+        $q.platform.is.desktop || $q.screen.gt.md ? '' : 'margin-bottom:70px'
+      "
       class=" row q-mt-none q-gutter-xl q-px-md "
       v-if="showList"
     >
@@ -48,7 +76,9 @@
             style="max-width:400px"
             class="q-mt-lg col-xs-10"
             :style="
-              $q.platform.is.mobile || $q.screen.lt.md ? '' : 'width:40vw'
+              $q.platform.is.mobile || $q.screen.lt.md
+                ? 'width:80vw'
+                : 'width:40vw'
             "
             ><q-video :ratio="16 / 9" :src="item.url" />
 
@@ -71,11 +101,11 @@
                     <q-img
                       :src="image.url"
                       spinner-color="white"
-                      style="height: 70px; max-width: 70px"
+                      style=" max-width: 70px"
                       :style="
                         $q.platform.is.mobile || $q.screen.lt.md
-                          ? 'width:16vw'
-                          : 'width:8vw'
+                          ? 'height: 50px;width:13.5vw'
+                          : 'height: 70px;width:8vw'
                       "
                     />
                   </q-item-section>
@@ -161,6 +191,7 @@ class Dashboard extends Vue {
     this.$set(this.videos[index], "selectedframe", image.id);
     this.showList = true;
   }
+
   deleteitem(index) {
     this.deleteitem;
     const msg = {
@@ -173,6 +204,41 @@ class Dashboard extends Vue {
       this.updatePhotos(this.videos);
       this.showList = true;
     });
+  }
+
+  SaveData() {
+    const Data = _.cloneDeep(this.getphotos);
+    const SaveData = _.map(Data, x => {
+      const obj = { id: x.id, frameId: x.selectedframe };
+      return obj;
+    });
+    const url = "http://www.mocky.io/v2/5ed609363400004d0006d602";
+    var self = this;
+    console.log(this.$q);
+    this.$q.loading.show({
+      spinner: QSpinnerIos,
+      message:
+        '<b>Data</b> Data etting saved .<br/><span class="text-primary">Hang on...</span>'
+    });
+    axios({
+      method: "post",
+      url: url,
+      data: JSON.stringify(SaveData)
+    }).then(
+      response => {
+        console.log(self);
+        self.$q.loading.hide();
+        self.$q.notify({
+          message: "Data Saved Sucessfully...",
+          type: "positive"
+        });
+
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
 export default Dashboard;

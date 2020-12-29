@@ -2,20 +2,18 @@
   <q-layout view="lHh Lpr lFf" class="layoutclass">
     <q-header elevated>
       <q-toolbar class="bg-accent">
-        <!-- <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        /> -->
-
-        <q-toolbar-title>
-          Humoingos
+        <q-img
+          class="absolute-left"
+          spinner-color="white"
+          src="../assets/logomini.png"
+          style="width: 35px; height: 45px; margin-left: 9px; margin-top: 5px;"
+        />
+        <!-- <q-space></q-space> -->
+        <q-toolbar-title  style="text-align:center">
+          Homingos
         </q-toolbar-title>
 
-        <div>A Smart Photography Application</div>
+        <div v-if="!$q.platform.is.mobile && $q.screen.gt.md ">A Smart Photography Application</div>
       </q-toolbar>
     </q-header>
 
@@ -40,9 +38,9 @@
       </q-list>
     </q-drawer> -->
 
-    <q-page-container class="q-pb-md"> 
+    <q-page-container class="q-pb-md">
       <!-- <q-parallax src="https://cdn.quasar.dev/img/parallax2.jpg"> -->
-        <router-view />
+      <router-view />
       <!-- </q-parallax> -->
     </q-page-container>
   </q-layout>
@@ -107,9 +105,8 @@ export default {
   }
 };
 </script>
-<style  scoped>
+<style scoped>
 .layoutclass {
-  background:#ae9fe9
+  background: #ae9fe9;
 }
-
 </style>
