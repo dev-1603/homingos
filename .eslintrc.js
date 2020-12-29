@@ -69,13 +69,13 @@ module.exports = {
     // 'import/extensions': 'off',
     // 'import/no-unresolved': 'off',
     // 'import/no-extraneous-dependencies': 'off',
-    // 'export @dec class': 'off',
+    'export @dec class': 'off',
     // 'space-before-function-paren': 'off',
-    // 'dot-notation': 'off',
-    // 'no-case-declarations': 'off',
-    // 'vue/no-use-v-if-with-v-for': 'off',
-    // 'vue/valid-v-slot': 'off',
-    // 'vue/custom-event-name-casing': 'off',
+    'dot-notation': 'off',
+    'no-case-declarations': 'off',
+    'vue/no-use-v-if-with-v-for': 'off',
+    'vue/valid-v-slot': 'off',
+    'vue/custom-event-name-casing': 'off',
 
 
     // allow debugger during development only

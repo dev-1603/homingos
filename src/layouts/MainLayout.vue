@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="bg-secondary">
+  <q-layout view="lHh Lpr lFf" class="layoutclass">
     <q-header elevated>
       <q-toolbar class="bg-accent">
         <!-- <q-btn
@@ -40,7 +40,7 @@
       </q-list>
     </q-drawer> -->
 
-    <q-page-container>
+    <q-page-container class="q-pb-md"> 
       <!-- <q-parallax src="https://cdn.quasar.dev/img/parallax2.jpg"> -->
         <router-view />
       <!-- </q-parallax> -->
@@ -107,3 +107,9 @@ export default {
   }
 };
 </script>
+<style  scoped>
+.layoutclass {
+  background:#ae9fe9
+}
+
+</style>
