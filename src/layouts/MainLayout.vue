@@ -1,15 +1,15 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="layoutclass">
     <q-header elevated>
-      <q-toolbar class="bg-accent col-12">
+      <q-toolbar class="bg-accent col-12 row">
+          <!-- class="absolute-left col-3" -->
         <q-img
-          class="absolute-left"
           spinner-color="white"
           src="../assets/logomini.png"
           style="width: 35px; height: 45px; margin-left: 9px; margin-top: 5px;"
         />
         <!-- <q-space></q-space> -->
-        <q-toolbar-title style="text-align:center">
+        <q-toolbar-title >
           Homingos
         </q-toolbar-title>
 

@@ -244,7 +244,6 @@ class Dashboard extends Vue {
   }
 
   mounted() {
-
     this.$q.loading.show({
       spinner: QSpinnerIos,
       message:
@@ -272,6 +271,7 @@ class Dashboard extends Vue {
   setimage(image, index) {
     this.showList = false;
     this.$set(this.videos[index], "selectedframe", image.id);
+    this.updatePhotos(_.cloneDeep(this.videos))
     this.showList = true;
   }
 
@@ -291,6 +291,7 @@ class Dashboard extends Vue {
 
   SaveData() {
     const Data = _.cloneDeep(this.getphotos);
+    debugger;
     const SaveData = _.map(Data, x => {
       const obj = { id: x.id, frameId: x.selectedframe };
       return obj;
