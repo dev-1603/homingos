@@ -2,6 +2,10 @@
 
 smart picture appication
 
+
+## Visit website
+https://dev-1603.github.io/smartphotograph.github.io/
+
 ## Install the dependencies
 ```bash
 npm install
