@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- {{ $q.platform }} -->
     <div class="row">
       <span
         :class="$q.screen.lt.sm ? 'text-h5' : 'text-h3'"
@@ -41,8 +40,6 @@
         class="float-right q-ma-sm"
         @click="SaveData()"
       ></q-btn>
-      <!-- style="z-index:100; position:absolute;bottom: 50px; right: 5px;" -->
-      <!-- <q-btn fab icon="add" color="accent" /> -->
     </q-page-sticky>
     <div
       :style="
@@ -123,7 +120,6 @@
                   :active="item.selectedframe === image.id"
                   @click="setimage(image, index)"
                 >
-                  <!-- active-class="my-menu-link" -->
                   <q-item-section style="max-width:85px">
                     <q-img
                       :src="image.url"
@@ -248,14 +244,14 @@ class Dashboard extends Vue {
   }
 
   mounted() {
-    // this.toggleSpinner(true)
+
     this.$q.loading.show({
       spinner: QSpinnerIos,
       message:
         '<b>Data</b> fetching is in progress.<br/><span class="text-primary">Hang on...</span>'
     });
     axios
-      .get("http://www.mocky.io/v2/5ed5fda4340000740006d560?mocky-delay=500ms")
+      .get("https://www.mocky.io/v2/5ed5fda4340000740006d560?mocky-delay=500ms")
       .then(response => {
         const { data } = response;
         this.$q.loading.hide();
@@ -267,7 +263,6 @@ class Dashboard extends Vue {
           this.videos.push({ id: "new" });
         }
         this.updatePhotos(_.cloneDeep(this.videos));
-        // this.toggleSpinner(false)
 
         this.showList = true;
       })
@@ -300,7 +295,7 @@ class Dashboard extends Vue {
       const obj = { id: x.id, frameId: x.selectedframe };
       return obj;
     });
-    const url = "http://www.mocky.io/v2/5ed609363400004d0006d602";
+    const url = "https://www.mocky.io/v2/5ed609363400004d0006d602";
     var self = this;
     console.log(this.$q);
     this.$q.loading.show({

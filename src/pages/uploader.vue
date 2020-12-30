@@ -30,7 +30,6 @@
             <!-- thumbnail -->
             <q-item-section v-if="file.__img" class="">
               <q-img :src="file.__img.src" />
-              <!-- <img :src="file.__img.src" /> -->
             </q-item-section>
             <!-- <q-item-section>
               <q-item-label class="full-width ellipsis">
@@ -133,8 +132,6 @@ class uploader extends Vue {
   }
 
   onRejected(rejectedEntries) {
-    // Notify plugin needs to be installed
-    // https://quasar.dev/quasar-plugins/notify#Installation
     this.$q.notify({
       type: "negative",
       message: `${rejectedEntries.length} file(s) did not pass validation constraints`
