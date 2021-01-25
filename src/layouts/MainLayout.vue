@@ -10,7 +10,7 @@
         />
         <!-- <q-space></q-space> -->
         <q-toolbar-title >
-          Homingos
+          Smart Photographs
         </q-toolbar-title>
 
         <div v-if="!$q.platform.is.mobile && $q.screen.gt.md">

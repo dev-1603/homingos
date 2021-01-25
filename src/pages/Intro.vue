@@ -14,13 +14,13 @@
         style="max-width:90vw"
         class="my-card q-col-gutter-xs"
       >
-        <q-img
+        <!-- <q-img
           spinner-color="white"
           size="sm"
           style="max-width:80vw"
           src="../assets/logo_full.png"
           :ratio="17 / 8"
-        />
+        /> -->
         <q-card-section>
           <h4>Smartphotos</h4>
         </q-card-section>
