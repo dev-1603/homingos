@@ -1,4 +1,4 @@
-# homingos (homingos)
+# Smart Picture Application
 
 smart picture appication
 
